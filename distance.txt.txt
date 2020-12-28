@@ -1,0 +1,34 @@
+def distance(source, target):
+    '''
+    initialize a 2D array with -1 in all cells
+
+    table = [[]]
+    for i in range(lenS):
+        for j in range(lenT):
+            table[i][j]=-1
+    '''
+    lenS=len(source)+1
+    lenT=len (target)+1
+            
+    table =[[(-1) for j in range(lenS)] (-1) for i in range(lenT)]     
+            
+    return distance1(table,source,target)
+
+def distance1(table, source, target):
+     lenS=len(source)
+     lenT=len (target)
+     if (lenS == 0):  
+        return lenT
+     if (lenT == 0): 
+        return lenS
+    
+     if table[lenS][lenT] == -1:
+         if (source[0] == target[0]): 
+            table[lenS][lenT] = distance(table,source[1:],target[1:])
+         else:
+          substitution = distance(table,source[1:], target[1:])
+          deletion     = distance(table,source[1:], target)
+          insertion    = distance(table,source, target[1:])
+          table[lenS][lenT] = 1 + min(min(substitution, deletion), insertion)
+                 
+     return table[lenS][lenT]
